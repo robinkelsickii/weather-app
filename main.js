@@ -1,25 +1,49 @@
-const { default: axios } = require("axios");
+// const axios = require('axios').default;
 
-//  declare the html variables
- var weather = document.getElementById('fetchData');
- var currentCity = document.getElementById('currentCity');
- var results = document.getElementById('results'); 
- var tempK = document.getElementById('tempK');
- var tempF = document.getElementById('tempF');
- var tempC = document.getElementById('tempC');
- var condition = document.getElementById('condition');
- var imgRel = document.getElementById('imgRel'); 
 
-// Make a request for a user with a given ID
-axios.get('https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=158d826e33ea4161dcd80cab8aa55710')
-  .then(function (response) {
-    // logs correctly in the console on succes 
-    console.log(response);
-  })
-  .catch(function (error) {
-    // logs an error message if it fails
-    console.log(error);
-  })
-  .then(function () {
-    // call function 
-  });
+
+//  handle the html elements
+const getData = document.getElementById('getData');
+const zipcode = document.getElementById('zipcode');
+const city = document.getElementById('searchedCity');
+const kelvin = document.getElementById('tempK');
+const farenheit = document.getElementById('tempF');
+const celsius = document.getElementById('tempC');
+const condition = document.getElementById('condition');
+const img = document.getElementById('img');
+const results = document.getElementById('results');
+
+var url = 'https://api.openweathermap.org/data/2.5/weather?zip=20755&appid=158d826e33ea4161dcd80cab8aa55710';
+
+function getWeather() {
+  axios.get(url)
+    .then(function (response) {
+      //on success
+      console.log(response);
+      city.innerHTML = response.data.name;
+      kelvin.innerHTML = response.data.main.temp + " K"; 
+      farenheit.innerHTML = Math.ceil((response.data.main.temp - 273.15) * (9/5) + 32) + " °F";
+      celsius.innerHTML = Math.ceil(response.data.main.temp - 273.15) + " °C";
+      condition.innerHTML = response.data.weather[0].description;  
+    })
+    .catch(function (error) {
+      // on error
+      console.log(error);
+    })
+    .then(function () {
+      // this is so that the functions are always executed. 
+    })
+}
+getData.addEventListener('click', getWeather);
+
+
+
+
+
+
+
+
+
+
+
+
