@@ -10,26 +10,27 @@ const kelvin = document.getElementById('tempK');
 const farenheit = document.getElementById('tempF');
 const celsius = document.getElementById('tempC');
 const condition = document.getElementById('condition');
-const pic = document.getElementById('pic');
 const results = document.getElementById('results');
 const feel = document.getElementById('feel');
 const humidity = document.getElementById('humidity');
-const cloudCoverage = document.getElementById('cloudCoverage');
 
-let page = 0; 
 
-function submit(){
+
+
+let page = 0;
+
+function submit() {
   page++
   getPage();
 }
 getData.addEventListener('click', init);
 
-function getPage(){
-  if (page == 0){
-    results.style.visibility = "hidden"; 
+function getPage() {
+  if (page == 0) {
+    results.style.visibility = "hidden";
   }
-  else if (page == 1){
-    results.style.visibility = "visible"; 
+  else if (page == 1) {
+    results.style.visibility = "visible";
   }
 }
 
@@ -40,12 +41,28 @@ function getWeather() {
   axios.get(url)
     .then(function (response) {
       //on success
-      console.log(response);
+      // console.log(response);
       city.innerHTML = response.data.name;
       kelvin.innerHTML = response.data.main.temp + " K";
       farenheit.innerHTML = Math.ceil((response.data.main.temp - 273.15) * (9 / 5) + 32) + " °F";
       celsius.innerHTML = Math.ceil(response.data.main.temp - 273.15) + " °C";
       condition.innerHTML = response.data.weather[0].description;
+
+      function showImg() {
+        if (response.data.main.temp >= 297) {
+          var img = document.createElement('img');
+          img.src = "./img/pexels-fabio-partenheimer-712395.jpg"
+          var x = document.getElementById('x');
+        }
+        else if (response.data.main.temp < 286) {
+          img.src = "./img/pexels-benjamin-lehman-1436134.jpg"
+        }
+        else {
+          img.src = "./img/pexels-lisa-9665012.jpg"
+        }
+
+      }
+
     })
     .catch(function (error) {
       // on error
@@ -56,13 +73,11 @@ function getWeather() {
     })
 }
 
-
-
-function verifyZip(){
-  if (zipcode.value.length === 5){
-    console.log('true');
+function verifyZip() {
+  if (zipcode.value.length === 5) {
+    // console.log('true');
   }
-  else if (zipcode.value.length === 0){
+  else if (zipcode.value.length === 0) {
     alert("Enter your Zipcode")
   }
   else {
@@ -72,10 +87,11 @@ function verifyZip(){
 
 
 
-function init(){
+function init() {
+  page == 0;
   submit();
   getWeather();
-  getPage(); 
+  getPage();
   verifyZip();
 }
 
