@@ -13,7 +13,7 @@
   <title>Weather App</title>
 </head>
 
-<body>
+<body onload="init()">
   <div id="input" class="container">
     <div class="row ms-5 me-5">
       <div class="col-12">
@@ -60,10 +60,8 @@
         <div class="col border bg-warning border-2 text-center">
           <h6>Other</h6>
         </div>
-        <div class="col border border-2 border-warning">
-          <p id="feel"></p>
-          <p id="humidity"></p>
-          <p id="cloudCoverage"></p>
+        <div class="col border border-2 border-warning text-center">
+          <img src="" class="img fluid">
         </div>
       </div>
     </div>

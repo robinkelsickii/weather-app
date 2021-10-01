@@ -10,7 +10,7 @@ const kelvin = document.getElementById('tempK');
 const farenheit = document.getElementById('tempF');
 const celsius = document.getElementById('tempC');
 const condition = document.getElementById('condition');
-const img = document.getElementById('img');
+const pic = document.getElementById('pic');
 const results = document.getElementById('results');
 const feel = document.getElementById('feel');
 const humidity = document.getElementById('humidity');
@@ -56,14 +56,18 @@ function getWeather() {
     })
 }
 
+
+
 function verifyZip(){
   if (zipcode.value.length === 5){
     console.log('true');
   }
+  else if (zipcode.value.length === 0){
+    alert("Enter your Zipcode")
+  }
   else {
     alert("Please enter a valid zipcode")
   }
-  return verifyZip();
 }
 
 
@@ -71,7 +75,8 @@ function verifyZip(){
 function init(){
   submit();
   getWeather();
-  verifyZip(); 
+  getPage(); 
+  verifyZip();
 }
 
 
