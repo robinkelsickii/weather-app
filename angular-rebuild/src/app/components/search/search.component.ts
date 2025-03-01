@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, output } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { LocationService } from '../../core/services/location.service';
 
 @Component({
@@ -8,20 +8,28 @@ import { LocationService } from '../../core/services/location.service';
   standalone: true,
 })
 export class SearchComponent {
-  constructor(private locationservice: LocationService ){}
-
   city: string = '';
   zipcode: string = '';
+  lat: number = 0;
+  lon: number = 0;
+  stateCode: string = '';
+  countryCode: string = '';
 
-  @Output() searchByCity = new EventEmitter<string>();
-  @Output() searchByZip = new EventEmitter<string>();
+  constructor(private locationservice: LocationService) {
+    this.city = locationservice.getCity();
+    this.zipcode = locationservice.getZipcode();
+    const coord = locationservice.getCoord();
+    this.lat = coord.lat;
+    this.lon = coord.lon;
+    this.stateCode = locationservice.getStateCode();
+    this.countryCode = locationservice.getCountryCode();
+  }
 
-  searchEvent() {
-    if (this.city.trim()) {
-      this.searchByCity.emit(this.city);
-    }
-    if (this.zipcode.trim()) {
-      this.searchByZip.emit(this.zipcode);
-    }
+  setLocationData(): void {
+    this.locationservice.setCity(this.city);
+    this.locationservice.setZipcode(this.zipcode);
+    this.locationservice.setCoord(this.lat, this.lon);
+    this.locationservice.setStateCode(this.stateCode);
+    this.locationservice.setCountryCode(this.countryCode);
   }
 }
