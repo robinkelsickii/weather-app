@@ -16,7 +16,7 @@ export class WeatherService {
     return this.http.get(`${this.baseUrl}?q=${city}&appid=${this.apiKey}`);
   }
 
-  getWeatherByZip(zip: string): Observable<any>{
+  getWeatherByZip(zipcode: string): Observable<any>{
     return this.http.get(`${this.baseUrl}?zip={zipcode}&appid=${this.apiKey}`);
   }
 }

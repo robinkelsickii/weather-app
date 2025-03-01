@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter, output } from '@angular/core';
+import { LocationService } from '../../core/services/location.service';
 
 @Component({
   selector: 'app-search',
@@ -7,6 +8,8 @@ import { Component, Output, EventEmitter, output } from '@angular/core';
   standalone: true,
 })
 export class SearchComponent {
+  constructor(private locationservice: LocationService ){}
+
   city: string = '';
   zipcode: string = '';
 
