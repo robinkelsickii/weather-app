@@ -1,9 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SearchBar from '@/components/SearchBar.vue';
+</script>
 
 <template>
-  <div>
-    <h1>Vue 3 + Vite + TypeScript</h1>
-    <p>Vue 3 + Vite + TypeScript</p>
+  <div class="d-flex justify-content-center align-items-center vh-100">
+    <SearchBar />
   </div>
 </template>
 

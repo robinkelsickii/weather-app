@@ -2,9 +2,9 @@ import axios from 'axios';
 import type { Weather } from '@/models/Weather';
 import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
 
-const apiKey = process.env.OPEN_WEATHER_API_KEY;
+const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
 const baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
 export async function getWeatherByCity(city: string): Promise<Weather> {
